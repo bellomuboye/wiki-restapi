@@ -72,6 +72,23 @@ app.route('/articles/:specificArticle')
 				res.send(err);
 			}
 		})
+	})
+	.put(function (req, res) {
+		Article.update(
+			{title: req.params.specificArticle},
+			{
+				title: req.body.title,
+				content: req.body.content
+			},
+			{overwrite: true},
+			function (err) {
+				if (!err) {
+					res.send("Successfully updated article");
+				} else {
+					res.send(err);
+				}
+			}
+		);
 	});
 
 app.listen(3000, function() {
